@@ -71,4 +71,9 @@ func deleteMovie(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
+	//returning all movies after the delete action
+	err := json.NewEncoder(w).Encode(movies)
+	if err != nil {
+		return
+	}
 }
