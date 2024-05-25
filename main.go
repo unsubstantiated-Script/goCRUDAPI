@@ -32,10 +32,10 @@ func main() {
 	movies = append(movies, Movie{ID: "3", Isbn: "4385333", Title: "Movie Three", Director: &Director{FirstName: "Filibuster", LastName: "Nutz"}})
 
 	r.HandleFunc("/movies", getMovies).Methods("GET")
-	r.HandleFunc("/movies{id}", getMovie).Methods("GET")
+	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
 	r.HandleFunc("/movies", createMovie).Methods("POST")
-	r.HandleFunc("/movies{id}", updateMovie).Methods("PUT")
-	r.HandleFunc("/movies{id}", deleteMovie).Methods("DELETE")
+	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
+	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
 
 	fmt.Println("Starting server on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
@@ -75,7 +75,7 @@ func createMovie(w http.ResponseWriter, r *http.Request) {
 	movie.ID = strconv.Itoa(rand.Intn(100000000))
 	movies = append(movies, movie)
 
-	err = json.NewEncoder(w).Encode(movie)
+	err = json.NewEncoder(w).Encode(movies)
 	if err != nil {
 		return
 	}
@@ -116,6 +116,7 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				continue
 			}
+			return
 		}
 	}
 }
