@@ -2,6 +2,9 @@
 
 SIMPLE CRUD API
 
+### Libraries Used
+* Gorilla Mux
+
 ```mermaid
 erDiagram
     DATABASE ||--o| MOVIES_SERVER: hosts
